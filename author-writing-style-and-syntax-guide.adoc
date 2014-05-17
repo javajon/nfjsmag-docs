@@ -1,0 +1,1015 @@
+= Writing Style and Syntax Guide
+:toc:
+:experimental:
+:source-highlighter: coderay
+:language: asciidoc
+:example-caption!:
+:pre-uri: http://en.wikipedia.org/wiki/List_of_English_prepositions
+:subs-uri: http://asciidoctor.org/docs/user-manual/#text-substitutions
+:cms-samples-uri: http://www.chicagomanualofstyle.org/tools_citationguide.html
+:pygments-uri: http://pygments.org/languages/
+:table-uri: http://asciidoctor.org/docs/user-manual/#tables
+
+This guide describes NFJS, the Magazine's preferred tone, structure, and grammar styles.
+When applicable, it provides examples of the corresponding AsciiDoc syntax.
+
+== Bias-free Language
+
+Please avoid language, images or code examples that allude to beliefs or stereotypes regarding race, ethnicity, gender, sexual orientation, disability, or religion.
+Also, please use gender neutral language instead of _he_, _she_, or _s/he_.
+
+.Three ways to remove gender bias.
+--
+Omit the pronoun:: Instead of ``the programmer should fetch the upstream repository before the data is allocated to her by the analytics team,'' write ``the programmer should fetch the upstream repository before the data is allocated by the analytics team''.
+
+Repeat the noun:: Instead of ``a programmer should not antagonize users because his karma will suffer,'' write ``a programmer should not antagonize users, because the programmer’s karma will suffer''.
+
+Use a plural antecedent:: Instead of ``a programmer must test himself with algorithm puzzles every day,'' write ``programmers must test themselves with algorithm puzzles every day''.
+--
+
+== Syntax Terminology and Rules
+
+Header::
+The first line and immediately consecutive lines in an AsciiDoc document.
+The header contains the article title, author name, document metadata, and document attributes.
+The header *can not* contain any blank lines but can contain line comments.
+The header must be separated from the first content element of the article by a single black line.
+In the case of NFJS, the Magazine, the first content element is the abstract.
+
+Element::
+A component of an AsciiDoc document.
+Examples: section, ordered list, inline URL.
+
+Block Element::
+A component that is separated from adjacent elements by a blank line.
+Examples: paragraph, image macro, table.
+
+Inline Element::
+A component that is nested within the contents of a block element.
+Examples: bold text formatting, attribute reference.
+
+Attribute::
+A key/value pair that activates and defines a property of an element.
+Attributes can be set on a whole AsciiDoc document or on individual block and inline elements.
+
+Key::
+An attribute's name.
+The key _toggles on_ or _sets_ the attribute.
+Most attributes, such as +style+, are automatically set when the document is parsed.
+Attributes can be toggled off when the key is preceded by a bang (+!+).
+
+Value::
+The data, data type, or operation assigned to an attribute.
+Some values are implicit.
+
+Document Attribute::
+A key/value pair set in the header.
+The attribute’s key is immediately preceded and followed by a colon.
+The optional value is separated from the second colon by a single space.
+Example: `:key: value`
+
+Attribute List::
+A comma separated list of attributes enclosed in a set of square brackets (`[]`).
+Attribute lists are set on a single instance of an element and take precedence over document attributes.
+Attribute lists contain positional and named attributes.
+Example: `[positional-attribute-value,key=value]`
+
+Positional Attribute::
+A key/value pair that is implicitly set when a value is assigned to a position, typically the first or second comma separated location, in an attribute list.
+The +style+ attribute in an example of a positional attribute.
+
+Named Attribute::
+A key/value pair in an attribute list.
+The attribute’s key is immediately followed by an equals sign and a value.
+Example: `[key=value]`
+
+Delimited Block::
+An element where a set of attributes are implicitly set when the parser encounters a line of two or four continuous symbols and unset when it encounters a second line of the same four symbols.
+The line of symbols is called a delimiter.
+
+=== Delimited Block Types
+
+With the exception of open blocks, all delimiter lines consist of precisely *four* characters.
+
+[WARNING]
+====
+*Do not* type delimiter lines longer than four characters.
+You are wasting time and introducing the chance of breaking the document's syntax.
+====
+
+.Delimited block uses and syntax
+[cols="1,1m,3,1"]
+|===
+|Style |Delimiter |Purpose |Substitutions
+
+|Listing
+|$$----$$
+|Source code or keyboard input is displayed as entered
+|Verbatim
+
+|Quote
+|$$____$$
+|A quotation, prose excerpt or verse with optional attribution
+|Normal
+
+|Sidebar
+|$$****$$
+|Aside text and content rendered outside the flow of the document
+|Normal
+
+|Open
+|$$--$$
+|Anonymous block that can act as any block, used for abstracts and to enclose lists with complex content
+|Determined by assigned style
+
+|Literal
+|$$....$$
+|Text is displayed exactly as entered, good for console output
+|Verbatim
+
+|Example
+|$$====$$
+|Designates example content or defines an admonition block
+|Normal
+|===
+
+The table below shows the substitutions performed by each substitution group.
+You can learn more about substitutions in the {subs-uri}[Asciidoctor User Manual].
+
+.Substitution groups
+|===
+|Group     |Special characters  |Quotes |Attributes |Replacements |Macros |Post replacements |Callouts
+
+h|Normal   |Yes                 |Yes    |Yes        |Yes          |Yes    |Yes               |No
+h|Verbatim |Yes                 |No     |No         |No           |No     |No                |Yes
+|===
+
+== Title, Author, and Article Metadata
+
+The main title, subtitle, author information, metadata, and other document attributes are all part of the header.
+
+The main title and subtitle should be direct and brief.
+A subtitle is optional.
+Capitalize the main title and subtitle <<headline,headline style>>.
+
+When an article is part of a series, the main title should remain the same throughout the series and be followed by a part number.
+Additionally, if you use a subtitle in the first article of a series, all of the articles in the series must have a subtitle.
+The subtitle should reflect the primary focus of that part.
+
+On separate lines beneath the author information, include values for the running head text (+slug+), table of contents teaser summary (+description+), and +keywords+ attributes.
+
+////
+ACTION: Need minimum character count for title and subtitle on small displays.
+ACTION: Parts - arabic or roman numerals?
+////
+
+.Header syntax
+[source]
+----
+= iOS Development in Ruby with RubyMotion, Part 3: Backend as a Service // <1> <2> <3>
+Brian Sam-Bodden <bsbodden@integrallis.com> // <4> <5>
+:css-signature: rubymotion-3
+:slug: mobileDev // <6>
+:description: In this part of the RubyMotion series, learn how to connect a simple iOS application to a Parse backend in order to provide a server-side component to a mobile offering. // <7>
+:keywords: Ruby, iOS, Parse, mobile // <8>
+ifndef::codedir[:codedir: code]
+ifndef::imagesdir[:imagesdir: images]
+:hide-uri-scheme:
+----
+<1> The main title is preceded by one equal sign and followed by a single space.
+<2> The part number follows the main title. Use a comma to separate the part number from the main title.
+<3> A subtitle is entered on the same line as the main title. Text entered after a colon is considered the subtitle. If you want to use a colon in your title without making it a subtitle, precede the colon with a backslash.
+<4> Your name is entered on the line directly below the title.
+<5> Your email is separated from your name by one space and bound in a set of angled brackets.
+<6> The slug is one word or two words that are joined in camel-case style. Use the same slug for all of the articles in a series.
+<7> A description can not be more than two sentences.
+<8> Choose two to four words or phrases to describe your article.
+
+.Multiple author syntax
+[source]
+----
+= It's the End of the Cloud as We Know It
+Andy Piper <apiper@gopivotal.com>; Matt Stine <matt.stine@gmail.com> // <1>
+----
+<1> Multiple author names and emails are listed on the same line and separated by a semicolon followed by one space.
+
+== Paragraphs
+
+To begin a new paragraph, separate it by one blank line from the element above it.
+Do not indent the first line of a paragraph.
+
+=== Use One Sentence Per Line and Soft Wrap
+
+As of May 2014, a number of EPUB and K8 text-to-voice readers don't speak with respect to punctuation.
+However, when each sentence is entered on its own line in an ADOC file, this accessibility error is corrected.
+And don't worry, single line breaks between sentences are not significant in AsciiDoc so your content won't render with each sentence on its own line.
+
+Sentence per line formatting also has numerous benefits for the author and editor.
+
+* Comments can be directed at a sentence
+** Line comments can be added between sentences
+* Sentences can easily be reordered
+* Changes in diffs are more apparent
+** Revisions do not cause unnecessary “reflow” of the text
+** Sentences can be compared in isolation
+* Encourages good sentence structure and rhythm
+** Long sentences are easier to detect
+** Word and sentence structure repetition is easier to spot
+* Avoids common problems with parsing AsciiDoc content (limits scope of pattern matching)
+* Counteracts writer's block (try it and you'll likely agree)
+
+Sentence per line should be natural for developers since it uses the same line-oriented approach developers use when writing code.
+
+Also, don't hard wrap your article.
+Hard wrap causes _reflow hell_ during the editing process and disguises long or run-on sentences.
+Instead, *get cozy with soft wrap*.
+
+.Sentence per line
+[source]
+----
+Notice that +ContactController+ is annotated with +@ConfigurationProperties(name="app")+.
+This is a special annotation that tells Spring Boot to automatically inject any properties on +ContactController+ using values configured external to the application.
+----
+
+.Sentence per line rendered
+====
+Notice that +ContactController+ is annotated with +@ConfigurationProperties(name="app")+.
+This is a special annotation that tells Spring Boot to automatically inject any properties on +ContactController+ using values configured external to the application.
+====
+
+.Take a Breath
+****
+Not sure what speaking with respect to punctuation means?
+Hear it for yourself.
+Load an O'Reilly book into the Kindle App, and have it read.
+Notice how the voice seems to pause at random places, making it hard to comprehend phrases or sentences.
+Then load the April 2014 issue of NFJS, the Magazine, and have it read.
+Now you can hear when one sentence ends and another begins.
+****
+
+=== Text Formatting
+
+Individual words or phrases are formatted when bound within a single set of syntax symbols.
+Characters which are not bound by white space must be marked by a double set of syntax symbols.
+
+.Italic and bold syntax
+----
+_italic phrase_ and le__tt__ers
+
+*bold phrase* and le**tt**ers
+----
+
+=== Punctuation and Unicode
+
+Within the normal content of your article, *please use curved quotation marks* (also known as smart quotes).
+
+.Curved quotes syntax
+----
+`single curved quotes' // <1>
+
+``double curved quotes'' // <2>
+----
+<1> One leading backtick (+{backtick}+) and one trailing single quote (+{apos}+) around a word or phrase encloses it in single curved quotes.
+<2> Two leading backticks (+{backtick}{backtick}+) and two trailing single quotes (+{apos}{apos}+) around a word or phrase encloses it in double curved quotes.
+
+WARNING: When single and double quotation marks are entered using the kbd:[{apos}] and kbd:[{quot}] key, they will render as straight (typewriter) quotation marks.
+
+== Abstract
+
+An abstract states the key topics and findings of the article and is the article's first content block.
+You must always include an abstract.
+Separate the abstract from the header with a single blank line.
+
+.Abstract syntax
+[source]
+----
+[abstract] // <1> <2>
+-- // <3>
+Spring Boot offers a greatly simplified development model for Spring that requires little or no configuration. // <2>
+This article picks up where last month's article left off, showing more Spring Boot tips and tricks.
+--
+----
+<1> Assign the +abstract+ value to the open block using an attribute list.
+<2> Place the attribute list above the open block delimiter. *Do not* insert a blank line between the attribute list and the delimiter.
+<3> The boundaries of an open block are defined by lines consisting of two hyphens (+--+).
+
+TIP: If the abstract is a single paragraph, you don't need to enclose it in an open block.
+
+== Section Titles and Levels
+
+Section titles reflect the main topic or important message of a section's content.
+The titles should be capitalized <<headline,headline style>>.
+
+[[headline]]
+.Headline-style Capitalization
+****
+* Capitalize the first letter of the first and last words of the title.
+* Capitalize the first letter of all the other nouns, pronouns, verbs, adjectives, and adverbs.
+* Lowercase {pre-uri}[prepositions] (about, as, for, versus, etc.,) except when used adverbially or adjectivally (Sign Up, Log In).
+* Lowercase articles (a, an, the).
+* Lowercase conjunctions (and, but, for, or, nor)
+* Lowercase proper nouns that are lowercased in the text (@object, motion-cocoapods).
+****
+
+Section title levels are specified by two to six equal signs.
+The number of equal signs represents the nesting level (using a 0-based index) of the title.
+For example, to designate a level two section title, which is the equivalent to an `<h3>` HTML tag, use three equal signs (+===+).
+Section levels must be nested logically (i.e., you can't nest a level 5 section directly in a level 3 section.
+
+.Section level syntax
+[source]
+----
+= Article (Document) Title (Level 0, H1)
+
+== Level 1 Section Title (H2)
+
+Text.
+
+=== Level 2 Section Title (H3)
+
+Text.
+
+==== Level 3 Section Title (H4)
+
+Text.
+
+== Another Level 1 Section Title
+
+Text.
+----
+
+[WARNING]
+====
+*Do not* use the _setext_ markup style for headings.
+====
+
+== Terms and Definitions
+
+The first time you present and define a concept that is vital to your article or that your readers may not be familiar with, annotate it with `[.term]` and enclose the word or phrase with <<italic_and_bold,emphasis marks>>.
+
+.Inline term
+[source]
+----
+In Java 8, [.term]_lambda expressions_ are anonymous functions that can stand in where instances of single abstract method interfaces are expected.
+----
+
+If you're defining multiple concepts in a row, use a definition list.
+You don't need to apply the term role or italic formatting to terms in a definition list.
+
+If you find yourself using bold text at the beginning of a list item, consider using a definition list.
+
+.Definition list
+[source]
+----
+CPU:: // <1>
+The brain of the computer. // <2>
+// <3>
+Hard drive::
+Permanent storage for operating system and/or user files.
+----
+<1> Follow each term with two colons.
+<2> Enter the definition text on a new line below the term.
+<3> Enter a single blank line between each term/definition pair.
+
+== Lists
+
+In addition to definition lists, content can also be presented as unordered and ordered lists.
+
+Single level unordered list items can be marked with a hyphen (+-+).
+Nested unordered list items must be marked with asterisks.
+
+.Unordered list with nested list items
+[source]
+----
+.Optional Title of List
+* List item
+** Nested list item
+*** Nested nested list item
+* List item
+----
+
+Ordered list items are marked with a period (+.+).
+
+.Ordered list with nested list items
+[source]
+----
+. List item
+. List item
+.. Nested list item
+... Nested nested list item
+. List item
+----
+
+== Source Code and Program Output
+
+Fixed-width (monospace) formatting is used to emulate the look of source code in consoles, text editors, and integrated development environments (IDEs).
+Enclose inline code in a set of plus signs (+{plus}+) or backticks (+{backtick}+) when you want it rendered using the monospace style.
+Don't mark up program, library, class, and gem names (e.g., Collections class, the Asciidoctor gem) or when referring to a term in a generic sense.
+
+.Inline code formatting syntax
+[source]
+----
+Next we define our +ColorPoint+ type as a +struct+.
+----
+
+To insert several, continuous lines of source code into your article, follow these steps:
+
+--
+. Write the code in a separate file and save it in your repository's [.file]_/code_ directory.
++
+.Breaking Syntax
+[WARNING]
+====
+Don't indent the source code or console output in your code files using the kbd:[tab] key.
+Tabs are criminal.
+====
+. In your article, create a delimited listing block where you want the code to be displayed.
+. Insert an +include+ function in the listing block and direct it to the code file's location.
++
+.Source code block syntax
+....
+.A greedy groovy coin changer // <1>
+[source,groovy] // <2> <3>
+---- // <4>
+include::{codedir}/GreedyCoinChanger.groovy[] // <5> <6>
+----
+....
+<1> Listing captions are preceded with a period (+.+). See Section xxx for more information about writing captions.
+<2> If you want syntax highlighting applied to the block's content, enter +source+ in the first attribute list position.
+<3> In the second position, set the code example's language. See <<syntax_highlighting,Syntax Highlighting>> for more information.
+<4> Listings are delimited by a set of four hyphens.
+<5> The include function is followed by two colons, the code directory's attribute reference, the code example's file name and extension, and a closed set of square brackets.
+<6> To display all of the file's content, leave the brackets empty (e.g., `[]`). To only display a portion of the code from the code file, set the <<tagging_code_snippets,tags attribute and its assigned value>> inside the square brackets.
+--
+
+You can also apply the literal and monospace styles to one or two lines of code without using a listing block or include file.
+
+.Literal (monospace) style
+----
+Let's add it to our project's Gemfile and bundle the application.
+// <1>
+ gem 'motion-cocoapods' // <2>
+----
+<1> Insert a single blank line between the previous element and the source code.
+<2> To implicitly use the literal style, indent the line of code by one space from the left margin.
+
+=== Callouts
+
+Instead of inline comments or a paragraph, use code callouts (i.e., annotations) to explain source code examples or console output.
+
+A callout is a number enclosed in angled brackets (e.g., `<1>`).
+Offset it from a line of code by a single space.
+You can also precede the callout by a line comment.
+Directly below the second block delimiter, type the callout again, followed by a single space, and then the explanatory text that corresponds to the line of code annotated inside the block.
+
+.Source code callouts
+[source]
+....
+.Query and Local Processing
+[source,java]
+----
+db = conn.db();
+List partialAnswer = q(queryPartA, db); // \<1>
+List enhanced = localProcess(partialAnswer); // \<2>
+List finalResult = q(queryPartB, db, enhanced); // \<3>
+----
+<1> Define the query
+<2> Do some local processing
+<3> Build on first query, still consistent!
+....
+
+[TIP]
+====
+* In the block, you can list several callouts on a single line of code. Separate them by a single space.
+* A block can not contain more than ten callouts.
+* Don't waste time aligning the callouts vertically
+* You can put the callout behind a line comment in most programming languages to avoid causing a syntax error in the raw source code.
+** In XML, the syntax of the commented callout should be `<!--n-->`, where _n_ is the callout index.
+====
+
+=== Tagging Code Snippets
+
+Tags are useful when you want to display specific regions of content from an include file instead of all of its content.
+The example below shows how you tag a region of content inside a file containing multiple code examples.
+
+.Tagged code snippets in a file named Routing.java
+[source,java]
+----
+public class Routing {
+  //tag::methods[] // <1> <2>
+  public String concat(String op1, String op2) { return op1 + op2; }
+  public static String combine(String op1, String op2) { return op1 + op2; }
+  //end::methods[] // <3> <4>
+
+  public static void main(String[] args) {
+    List<String> names = Arrays.asList("Matt", "Brian", "Nate", "Ken");
+
+    //tag::asArgLambda[] // <5>
+    names.forEach(name -> System.out.println(name));
+    names.forEach(name -> String.valueOf(name));
+    //end::asArgLambda[]
+----
+<1> To specify the beginning of a tagged region, insert a comment line in the code.
+<2> Assign a unique name to the +tag::[]+ macro. This tag is called _methods_.
+<3> Insert another comment line where you want the tagged region to end.
+<4> Assign the name of the region you want to end to the +end::[]+ macro.
+<5> This is the start a tagged snippet named _asArgLambda_. This snippet is called by the +include+ function in the next example.
+
+.Calling the _asArgLambda_ code snippet in the article
+....
+[source,java]
+----
+include::{codedir}/Routing.java[tag=asArgLambda] // <1>
+----
+....
+<1> In the function's brackets, set the +tag+ attribute and assign it the unique name of the code snippet you tagged in you code file.
+
+
+////
+ACTION: Create general rules for when listings should have captions and how they are referred to in the text.
+Listings should include a caption.
+See caption structure.
+ACTION: Create source code block length rules, # in listing, line length wrap conventions (screen restrictions)
+////
+
+=== Syntax Highlighting
+
+The +source+ attribute and source code language attribute are applied to listing blocks that require syntax highlighting.
+NFJS, the Magazine uses the Pygments library to apply highlighting.
+Visit the {pygments-uri}[Pygments website] to see the programming, template, and markup languages it supports.
+
+NOTE: NFJS may switch to the Coderay or Prettify highlighter.
+
+If you need to set the +source-highlighter+ attribute in your article's header to make a preview tool work (such as the Asciidoctor Chrome plugin), put it inside the +ifndef::env-editions[]+ conditional directive.
+
+.Setting the source-highlighter in the article's header
+[source]
+----
+\ifndef::env-editions[]
+:source-highlighter: pygments
+\endif::[]
+----
+
+If you're rendering your article using Asciidoctor, pass the +source-highlighter+ attribute as a command line flag.
+
+ $ asciidoctor -a source-highlighter=coderay article.adoc
+
+TIP: If most of the code examples are the same language, you can assign the language name to the +language+ attribute in the article's header and them omit it in the listing block attribute lists.
+
+=== Console Commands
+
+Console commands should be indented by a single space and begin with a dollar sign (+$+) followed by a space.
+Using this convention provides the semantics to allow the magazine to style them appropriately.
+
+.Console command
+[source]
+----
+ $ gem install asciidoctor
+----
+
+If you only need to display one or two lines of console output, put it on a line that begins with a hash (+#+) followed by a space.
+
+.Console command with output
+[source]
+----
+ $ file -b --mime-encoding article.adoc
+ # utf-8
+----
+
+If you need to display several lines of console output, insert it in a literal block.
+
+.Console command followed by console output
+[source]
+----
+ $ mvn compile // <1>
+
+.Command output // <2>
+.... // <3>
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building asciidoctorj 1.5.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] - maven-enforcer-plugin:1.0:enforce (enforce-maven) @ asciidoctorj
+[INFO]
+[INFO] - gem-maven-plugin:1.0.0-rc4:initialize (default) @ asciidoctorj
+[INFO]
+[INFO] - maven-resources-plugin:2.5:resources (default-resources) @ asciidoctorj
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO]
+[INFO] - maven-compiler-plugin:3.1:compile (default-compile) @ asciidoctorj
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+....
+----
+<1> A console command is indented by one space and marked with a dollar sign (+$+).
+<2> An optional title can be applied to the output.
+<3> A literal block is delimited by four periods (`....`).
+
+=== Listing and Literal Block Titles
+
+NOTE: Additional info pending
+
+Figures should include a caption.
+The caption describes the key observations or results of the figure.
+Captions can be an incomplete sentence, complete sentence, or several sentences.
+Complete sentence captions should have closing punctuation.
+Caption style should be consistent throughout your article, i.e. use either complete sentences or sentence fragments.
+If one or two captions are fragments, but the majority are complete, use closing punctuation on the fragments.
+If the figure requires a credit line, include it after the caption.
+
+Precede the figure with an ID.
+To reference the figure in the article text, use the reference ID.
+Don't precede the text reference with the block label (figure, listing, example), this will be generated with the ID.
+Mark the credit line with +[.cite]+.
+
+== Admonitions
+
+An admonition draws the reader's attention to auxiliary information.
+It's rendered style is determined by the assigned label (i.e., value).
+
+There are five available labels:
+
+* +NOTE+
+* +TIP+
+* +IMPORTANT+
+* +CAUTION+
+* +WARNING+
+
+Mark a single paragraph as an admonition by inserting a label on the first line of the paragraph.
+
+.Admonition paragraph
+----
+NOTE: An admonition draws the reader's attention to auxiliary information. // <1> <2>
+Its purpose is determined by the label at the beginning of the paragraph.
+----
+<1> The label must be uppercase and immediately followed by a colon (+:+).
+<2> Separate the first line of the paragraph from the label by a single space.
+
+Style complex content as an admonition by placing it in an example block.
+
+.Delimited admonition block
+[source]
+----
+[TIP] // <1>
+==== // <2>
+* one
+* two
+* three
+
+A paragraph.
+====
+----
+<1> Set the label in an attribute list on a delimited block. The label must be uppercase.
+<2> Admonition styles are commonly set on example blocks. Example blocks are delimited by four equal signs (+====+).
+
+== Sidebar
+
+Use a sidebar for ancillary content that doesn't fit into the flow of the article's narrative.
+A sidebar must be titled and its contents shouldn't be longer than one or two paragraphs.
+Sidebars can contain any type of content such as source code and images.
+
+.Delimited sidebar block
+----
+.Play Framework Provides Fast Feedback // <1>
+****
+Play Framework is a MVC framework written in Scala.
+It provides both Scala and Java API's to developers.
+You can mix both Java and Scala when building your application.
+...
+****
+----
+<1> A title is required. Capitalize the title <<headline,headline style>>.
+<2> A sidebar is delimited by four asterisks (`****`).
+
+== Quotes, Prose Excerpts, and Verses
+
+The quote and verse styles can be set on paragraphs and delimited quote blocks.
+If the quote or excerpt is a single element, you can set the attribute list directly on top of the content.
+
+.Quote paragraph
+[source]
+----
+.After landing the cloaked Klingon bird of prey in Golden Gate park: // <1>
+[quote, Captain James T. Kirk, Star Trek IV: The Voyage Home] // <2> <3> <4>
+Everybody remember where we parked. // <5>
+----
+<1> Mark lead-in text explaining the context or setting of the quote using a period (+.+). (optional)
+<2> For content that doesn't require the preservation of line breaks, set +quote+ in the first position of the attribute list.
+<3> The second position contains who the excerpt is attributed to. (optional)
+<4> Enter additional citation information in the third position. (optional)
+<5> Enter the excerpt or quote text on the line immediately following the attribute list.
+
+Place complex quote and excerpt content inside a quote block.
+
+.Delimited quote block
+[source]
+----
+[quote, Monty Python and the Holy Grail] // <1>
+____ // <2>
+Dennis: Come and see the violence inherent in the system. Help! Help! I'm being repressed!
+
+King Arthur: Bloody peasant!
+____
+----
+<1> Set the attribute list above the delimiter line.
+<2> A quote block delimiter line consists of four underscores (`____`).
+
+When you need to preserve indents and line breaks, use the +verse+ style.
+
+.Delimited quote block using the verse style
+----
+[verse, Carl Sandburg, Fog]
+____
+The fog comes
+on little cat feet.
+
+It sits looking
+...
+____
+----
+
+== The Image Macro
+
+Photographs, screenshots and graphics not created with PlantUML or Graphviz are inserted into the document with the +image::[]+ macro.
+
+. The image macro must be on its own line.
+. The image must have a caption.
+
+.Image macro anatomy
+----
+.Figure or image caption // <1>
+image::image_name.jpg[] // <2> <3>
+----
+<1> Place the image's caption above the macro directly after a leading dot (+.+).
+<2> Set the +image::+ macro and the image's file name.
+<3> Optional attributes can be set inside the square brackets (+[]+).
+
+[IMPORTANT]
+====
+* You *must* store images in the [path]_/images_ directory within your article repository.
+* Image paths must be relative to the [path]_/images_ directory. *Do not* nest images in additional folders within the [path]_/images_ directory.
+* *Do not* enter the image's full path in the image macro.
+* *Do not* use the inline +image+ macro, i.e. only one trailing colon (+:+).
+====
+
+== URLs and Cross References
+
+We recommend that you assign URLs to document attributes in order to keep your article text readable and to <<url_text,avoid parsing errors>>.
+
+.URL syntax
+----
+= iOS Development in Ruby with RubyMotion, Part 3: Backend as a Service
+[...]
+ifndef::imagesdir[:imagesdir: images]
+:hide-uri-scheme: // <1>
+:parse-uri: https://parse.com // <2>
+:sansref-uri: http://www.rubymotion.com/developer-center/guides/project-management/#_vendoring_3rd_party_libraries
+
+One such service, and the focus of this article, is {parse-uri}[Parse]. // <3>
+
+[...]
+
+- Sansonetti, Laurent. _RubyMotion Project Management Guide_. {sansref-uri}. // <4>
+----
+<1> Set the +hide-uri-scheme+ attribute when you need to include a URL in the text without link text and without the scheme (i.e., pass:[http://]).
+<2> Assign the URL to an attribute.
+<3> Place the attribute reference directly in front of the link text. Enclose the link text in square brackets (`[]`).
+<4> When an attribute reference isn't associated with link text, it will be replaced with the active URL value, but the scheme won't be displayed.
+
+In your biography, place URLs inline.
+
+.URLs in bio.adoc
+[source]
+----
+Stuart Halloway is a founder and the President of http://cognitect.com[Cognitect, Inc].
+----
+
+[[url_text]]
+.URLs and Text Formatting
+****
+A URL may not render correctly when it contains characters such as underscores (`_`) or carets (`^`).
+This problem occurs because the processor misinterprets parts of the link target as valid text formatting markup.
+Most lightweight markup languages have this issue because they don’t use a grammar-based parser.
+Asciidoctor plans to move to a grammar-based parser in the future, but for now, it is best to assign URLs to document attributes.
+****
+
+== User Interface Styles
+
+You can represent keyboard shortcuts, menu selections, and UI buttons using the UI macros.
+
+Keyboard macro:: `kbd:[key]`
+Menu selection macro:: `menu:menu-name[menu-item]`
+UI button macro::  `btn:[button-name]`
+
+IMPORTANT: You must set the +experimental+ attribute in the document header to enable these macros.
+
+.UI macro syntax
+----
+Press kbd:[Ctrl+Shift+N] to open a new incognito window.
+
+To save the file, select menu:File[Save].
+
+Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
+
+Press the btn:[OK] button when you are finished.
+----
+
+.Rendered UI macros
+====
+Press kbd:[Ctrl+Shift+N] to open a new incognito window.
+
+To save the file, select menu:File[Save].
+
+Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
+
+Press the btn:[OK] button when you are finished.
+====
+
+== Mathematical and Chemical Formulas
+
+Pending
+
+=== Subscript and Superscript
+
+Text is subscripted when you enclose it in a set of tildes (+{tilde}+) and superscripted with a set of carets (+{caret}+)
+
+.Superscript and subscript syntax
+----
+^super^script
+
+~sub~script
+----
+
+== Tables
+
+Use tables for tabular data only.
+Do not use tables for transcripts, chronologies, lists, sidebars, or any other formatting purposes.
+For the best user experience, table cells should not contain paragraphs of text or images.
+
+----
+[[table-id]]
+.Title of Table
+|=== // <1>
+|Name of Column 1 |Name of Column 2 // <2> <3>
+// <4>
+|Cell in column 1, row 1
+|Cell in column 2, row 1 // <5>
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+----
+<1> The table’s content boundaries are defined by a vertical bar and three equal signs (`|===`).
+<2> A new cell is marked by a vertical bar (`|`).
+<3> The first row of a table is rendered as a header row. Enter all of the cells of the header row on a single line. The number of cells in the first line directly following the table delimiter implicitly indicates the number of columns the table contains.
+<4> Rows are separated by blank lines.
+<5> Consecutively stack the cells of non-header rows.
+
+TIP: Leading and trailing spaces around the content in a cell are stripped; therefore, they don’t affect the table’s layout when it is rendered.
+
+Tables should have titles.
+Titles should be as succinct as possible and should not suggest any interpretation of the data.
+Capitalize the title in <<headline,headline style>>.
+Important explanatory or statistical information may be included in parentheses in a title.
+Don't use headline-style capitalization for such material.
+Cite each table in the text, either directly or parenthetically.
+
+.UX #Fail
+[WARNING]
+====
+* Do not create tables with more than *24 rows*.
+* A row can not contain more than *60 characters*.
+
+Tables that exceed these length and width restrictions will not display correctly on some Kindle devices.
+Also, large tables are difficult to view and navigate on devices with small displays.
+====
+
+TIP: Table columns and rows can be manipulated in a plethora of ways.
+See the {table-uri}[Asciidoctor User Manual] for examples of additional column and cell attributes.
+
+== Footnotes
+
+Footnotes provide additional narrative or author comments.
+Do not use them for <<bibliography,citations>> or <<urls_and_cross_references,URLs>>.
+
+A footnote is created with the footnote macro (`footnote:[]`).
+If you plan to reference a footnote more than once, use the ID footnote macro (`footnoteref:[]`).
+
+.Footnote and footnoteref syntax
+[source]
+----
+Protocols allow us to wire up abstractions in ways that the original authors of a type could not have conceived.
+So the next time we hear our colleagues complain about the “expression problem” we can share a knowing smile.footnote:[The expression problem, put succinctly, is twofold: we should have the ability to define new types based on existing contracts (which a language like Java lets us do via extends and implements) and the ability to take existing types and make them conform new contracts. The second part is beautifully implemented in Clojure via protocols.] // <1> <2>
+
+A bold statement.footnoteref:[disclaimer,These opinions are my own.] // <3> <4>
+
+Another bold statement.footnoteref:[disclaimer] // <5>
+----
+<1> Insert the footnote macro directly after any punctuation. Note that the footnote macro only uses one colon.
+<2> Insert the footnote's content within the square brackets of the macro. The text may span several lines.
+<3> The first time you enter a footnote you want to reuse, give it a unique ID in the first position.
+<4> Separate the ID from the footnote text with a comma. Do not enter a space between the comma and the footnote text.
+<5> The next time you reference the footnote you only need to insert the ID in the square brackets.
+
+When rendered, the footnotes will be numbered consecutively throughout the article.
+
+.Rendered footnotes
+====
+[.unstyled]
+|===
+a|
+Protocols allow us to wire up abstractions in ways that the original authors of a type could not have conceived.
+So the next time we hear our colleagues complain about the “expression problem” we can share a knowing smile.footnote:[The expression problem, put succinctly, is twofold: we should have the ability to define new types based on existing contracts (which a language like Java lets us do via extends and implements) and the ability to take existing types and make them conform new contracts. The second part is beautifully implemented in Clojure via protocols.]
+
+A bold statement.footnoteref:[disclaimer,These opinions are my own.]
+
+Another bold statement.footnoteref:[disclaimer]
+|===
+====
+
+== Resources
+
+A compilation of links used in the article and to resources the author feels are useful - this list is not the same as the bibliography.
+
+== Bibliography
+
+NFJS uses the author-date bibliography system.
+In this system, parenthetical citations are located in the body of the article and correspond to a reference entry in the References section.
+Parenthetical citations typically include the author’s last name, year of publication, and page number.
+
+.Parenthetical citation syntax
+[source]
+----
+This is a sentence. (<<ref-entry-id,author-last-name year>>) // <1> <2> <3> <4>
+----
+<1> Parenthetical citations are enclosed in a set of parentheses and a double set of angled brackets.
+<2> The reference entry ID is a unique identifier you create. The citation and the corresponding reference entry must share the same ID.
+<3> Separate the ID from the author's last name with a comma. Do not insert a space between the comma and the author.
+<4> Use a single space to separate the author's name and the publication year.
+
+The citations are amplified in a list in the References section, located at the end of your document.
+The list of reference entries should appear in alphabetical order by primary author last name.
+
+.Reference entry syntax
+[source]
+----
+- [[[ref-entry-id]]] Last-name, first-name. publication-year. _title_. publisher. // <1> <2>
+----
+<1> Entries that correspond to a parenthetical citation must have a reference entry ID. Enclose the ID in a triple set of square brackets.
+<2> Separate the ID from the reference entry by a single space.
+
+The format of a reference list entry is dependent on its source (i.e., journal articles, books, websites, etc.,).
+In general, bibliographic information includes the author, date of publication, publication title, publisher, page numbers, URL, and DOI, where applicable.
+When no author is available, begin the bibliography with the publication title.
+
+The following examples illustrate citations using the author-date system.
+Each parenthetical citation is accompanied by an example of a corresponding reference list entry.
+
+.Parenthetical citations and reference entries for printed and digital books
+[source]
+----
+... improvements to the support for concurrent code execution on multicore hardware in iOS and OS X. (<<appleref,Apple 2013>>) // <1>
+... the pros and cons of each of these options must be weighed. (<<chaconref,Chacon 2009, chap. 2>>) // <2>
+... transform them into a habit and eventually mastery. (<<kellerref,Keller and Papasan 2013, 113-114>>) // <3>
+Years ago I read the famous book by William Zinsser, On Writing Well, 25th Anniversary: The Classic Guide to Writing Nonfiction. // <4>
+
+[bibliography] // <5>
+== References
+
+[bibliography]
+- [[[appleref]]] Apple. 2013. _Grand Central Dispatch Reference_. Last modified December 12, 2013. {gcdref-uri}. // <6> <7>
+- [[[chaconref]]] Chacon, Scott. 2009. _Pro Git_. Apress. http://git-scm.com/book. // <8>
+- Cohn, Mike. 2010. _Succeeding with Agile: Software Development Using Scrum_. Addison-Wesley. Kindle edition. // <9>
+- [[[kellerref]]] Keller, Gary, and Jay Papasan. 2013. _The ONE Thing: The Surprisingly Simple Truth Behind Extraordinary Results_. Bard Press. // <10>
+- Zinsser, William. 2001. _On Writing Well, 25th Anniversary: The Classic Guide to Writing Nonfiction_. New York: Harper Resource.
+----
+<1> Parenthetical citation for a corporate reference.
+<2> Parenthetical citation for a chapter of an online book.
+<3> Parenthetical citation for a reference with two authors.
+<4> When a citation is part of the article's text, a parenthetical citation and reference entry ID are not necessary.
+<5> The +bibliography+ style is set on the References section title and the reference entry list.
+<6> A corporate-authored, online document. Italicize book titles and use headline-style capitalization.
+<7> Online content is subject to change, so include an access date or, if available, a date when the web page was last modified.
+<8> An online book.
+<9> A book published in multiple electronic formats.
+<10> A printed book by two authors. For four or more authors, list all of the authors in the reference list. In the parenthetical citation, list only the first author, followed by et al. (``and others'').
+
+Journal article and blog post parenthetical citations use the same structure and syntax as book citations.
+However, their reference entries include additional information and different formatting.
+
+.Journal and blog post reference entries
+----
+- Fowler, Martin. 2005. ``CommandQuerySeparation.'' Accessed August 15. http://martinfowler.com/bliki/CommandQuerySeparation.html. // <1>
+- Kossinets, Gueorgi, and Duncan J. Watts. 2009. ``Origins of Homophily in an Evolving Social Network.'' _American Journal of Sociology_ 115:405–50. Accessed February 28, 2010. doi:10.1086/599247. // <2>
+- Weinstein, Joshua I. 2009. ``The Market in Plato’s Republic.'' _Classical Philology_ 104:439–58. // <3>
+----
+<1> Blog entries may be cited as part of the article's text (``In Martin Fowler's May 5, 2005 blog post...'') and omitted from the References section. If the citation isn't part of the text, enter a parenthetical citations and reference list entry. Blog post comments should only be cited in the article's text.
+<2> An article in an online journal. If the online journal article does not have a DOI number, use the web page URL where the article was accessed.
+<3> An article in a printed journal.
+
+For additional reference examples, see the Chicago-Style Citation Quick Guide's {cms-samples-uri}[Author-Date: Sample Citations].

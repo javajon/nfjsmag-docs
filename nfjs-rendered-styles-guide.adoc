@@ -1,0 +1,7 @@
+= NFJS, the Magazine Style Guide
+
+This guide showcases the rendered content styles for NFJS, the Magazine.
+
+////
+Populate with draft content style guide
+////

@@ -1,0 +1,7 @@
+= Editor Tools Guide
+
+Step by step instructions for working with the NFJS magazine configuration toolchain.
+
+////
+Populate with draft install guide
+////

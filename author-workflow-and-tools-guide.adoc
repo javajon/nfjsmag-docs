@@ -1,0 +1,212 @@
+= Author Workflow and Tools
+:chrome-uri: https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia?hl=en
+:install-uri: http://asciidoctor.org/docs/#get-started-with-asciidoctor
+
+== Writing Your Article
+
+Prior to writing an article for NFJS, the Magazine, send your GitHub username and the email you use to receive GitHub notifications to Matt Stine.
+Once this information is received, a GitHub repository will be generated for you.
+You will receive a welcome message listing important deadlines and author resources.
+
+== Article Repository Structure
+
+A GitHub repository is created in the NFJS organization for each article you write.
+The repository is seeded with templates, author images, and documentation.
+This is your personal workspace.
+*Do not fork your repository*.
+
+article.adoc::
+Write your in this document.
+It includes the attributes and syntax the publishing toolchain requires.
+
+bio.adoc::
+Write your biography in this document.
+If you have written for NFJS, the Magazine, this document will contain the biographical content you supplied in your last article.
+
+avatar.jpg:: A small version of your headshot used on your article's title page.
+
+headshot.jpg:: Your personal image, used in your biography.
+
+/code:: Save all your code examples in this directory.
+
+/images:: Save all the images included in your article in this directory.
+//
+
+////
+["plantuml", "article-repo-structure", "svg"]
+----
+@startsalt
+{
+{T
+ + nfjsmag-<year>-<month>-<GitHub username>
+ ++ article.adoc
+ ++ <username>-bio.adoc
+ ++ <username>-avater.jpg
+ ++ <username>-headshot.jpg
+ ++ /code
+ ++ /images
+}
+}
+@endsalt
+----
+////
+
+[IMPORTANT]
+====
+* Do not change the template file names or file extensions in your repository.
+* Do not move the templates from the root of your article repository.
+* Do not create nested directories in the [path]_/code_ or [path]_/images_ directories.
+====
+
+== Article Format and Syntax
+
+AsciiDoc is the only accepted format for NFJS, the Magazine articles.
+We have moved to a highly automated production process for the layout-ready copy and publication formats (EPUB, K8/MOBI, PDF).
+As such, we are standardizing quite a bit of things, including the authoring syntax.
+We hope that this makes the overall experience better for everyone.
+
+=== UTF-8
+
+Your article *must* be encoded in UTF-8, and it *can not* have a Byte Order Mark (BOM).
+This ensures maximum portability of the content and saves us all a lot of headaches.
+
+Most text editors have an encoding (or character encoding) option in the save dialog.
+Write your article using an intelligent editor such as VIM, Emacs, TextMate, Sublime Text, pass:[Notepad++], Atom or Gedit.
+*Don't use Notepad or Wordpad on Windows.*
+
+To check if your document is UTF-8 on Linux / Unix / OSX, use the following command:
+
+ $ file -b --mime-encoding <filename>
+ # utf-8
+
+If you're using Windows, open the file in a editor like pass:[Notepad++] and set the encoding to UTF-8 manually.
+
+== Image Formats and Quality
+
+NOTE: The image sections are still in draft.
+
+Content included in you article using the +image+ macro or generated via Asciidoctor Diagram are collectively referred to as Figures.
+Figures should include a caption.
+The caption describes the key observations or results of the figure.
+Captions can be an incomplete sentence, complete sentence, or several sentences.
+Complete sentence captions should have closing punctuation.
+Caption style should be consistent throughout your article, i.e. use either complete sentences or sentence fragments.
+If one or two captions are fragments, but the majority are complete, use closing punctuation on the fragments.
+If the figure requires a credit line, include it after the caption.
+
+Precede the figure with an ID.
+To reference the figure in the article text, use the reference ID.
+Don't precede the text reference with the block label (figure, listing, example), this will be generated with the ID.
+Mark the credit line with +[.cite]+.
+
+=== Quality and Dimensions
+
+The images in your article must be legible and look crisp on high density displays.
+The best way to ensure your images (with the exception of photographs) look professional, regardless of what device they are displayed on, is to create them as Scalable Vector Graphics (SVG).
+
+Programs such as Inkscape and Adobe Illustrator can output SVGs.
+SVG UML diagrams and directed graphs can be created right in your article using PlantUML or Graphviz.
+See the SVG section for tips on how to optimize and save SVGs.
+
+Photographs should be saved as JPGs and meet the minimum resolution requirements detailed in the Photographs section.
+
+////
+TODO: Screenshots
+////
+
+=== Graphviz and PlantUML
+
+With +graphviz+ or +plantuml+, you can create diagrams and graphs directly in your article.
+
+.Graphviz example
+....
+[graphviz, dot-example, svg]
+----
+digraph g {
+    a -> b
+    b -> c
+    c -> d
+    d -> a
+}
+----
+....
+
+To render +graphviz+ or +plantuml+ SVGs locally, you'll need to install the {diagram-install-uri}[Asciidoctor Diagram extension].
+Also checkout the {diagram-feature-uri}[Asciidoctor Diagram], {plantuml-uri}[PlantUML], and {graphviz-uri}[Graphviz] documentation for additional example and help.
+
+=== Scalable Vector Graphics
+
+With the exception of photographs, your images should be created and saved as scalable vector graphics (SVG).
+SVGs are resolution independent, so they look crisp on any device regardless of display dimensions or pixel density.
+
+Once you finish creating a vector graphic there are a number of steps you can take to minimize its file size and to ensure it displays correctly within your article.
+
+. Shrink or crop the artboard/canvas to the edges of your graphic.
+. Use #rrggbb or #rgb colors
+. Remove any objects inside or outside your canvas that your don't need.
+. Remove extraneous nodes from paths (i.e. simplify your paths).
+. Remove any filters, patterns and gradients you didn't use.
+In Inkscape this is accomplished by using the +Vacuum Defs+ command.
+
+TIP: Prior to optimizing your vector graphic for the web, always save a master copy in a format that works best in your graphics tool (i.e. +.ai+ for Adobe Illustrator, Inkscape SVG for Inkscape.
+
+When you are ready to save an image for the web, look for commands such as Save for Web and Devices (Illustrator) or Optimized SVG (Inkscape).
+Once in the save dialog, select the SVG format and specify the following options if they are available.
+
+[horizontal]
+SVG Profiles:: SVG 1.1
+Fonts: Type:: SVG
+Fonts: Subsetting:: None(Use System Fonts)
+Images: Location:: Embed (You only need to select this option if your linked to other images within your image)
+CSS Properties:: Presentation Attributes
+Decimal Places:: 3
+Encoding:: UTF-8
+Output fewer <tspan> elements:: Yes
+
+TODO: Link to Inkscape tutorial coming soon
+
+=== Photographs
+
+Photographs (i.e. raster images ) which you would like to display the entire width of the page when the device is in landscape/widescreen mode should have a minimum width of 4096 pixels.
+Photographs that should fill the width of a device screen when in portrait mode, but not necessarily when in landscape/widescreen should have a minimum width of 1536 pixels.
+
+If you want a photograph to be displayed at 500 x 300 pixels, the minimum resolution you can save it at is 1000 x 600 px.
+
+* ppi/dpi: 150
+* color mode: srgb or rgb
+
+=== Screenshots
+
+If you need to take a screenshot of something, there is no way make it higher resolution later, it will just be the size you grab. Depending on what the subject is, you could consider increasing the size of the font on the page and taking a screen shot of a larger area if the layout allows for that sort of thing. However, depending on whether that increase makes the website you’re grabbing look broken, it may not be the best choice. With screenshots, just do the best you can.
+
+== Previewing Your Article
+
+In the near future, NFJS authors will download a gem containing all the necessary tools needed to render your article exactly as it will be published.
+In the mean time, the easiest way to test your syntax and render your article is to use the {chrome-uri}[Asciidoctor plugin for Chrome].
+
+To preview your article, load the file in the URL field.
+You do not need to process the document via the command line first.
+
+If you prefer to render the document using the command line, you'll need to have Asciidoctor installed.
+See the {install-uri}[Asciidoctor installation guides] for instructions.
+
+== Author Biography
+
+Write your biography in a file named [path]_bio.adoc_ at the root of the article repository.
+Don't use attribute references to replace URLs, instead, place the URLs directly in the text.
+
+// Do not put a section title above the bio text.
+// Do not add an “About the Author” section at the end of the article.
+
+////
+.Bio example, bio.adoc
+[source]
+----
+Stuart Halloway is a founder and the President of http://cognitect.com[Cognitect, Inc].
+He's a committer on the http://clojure.org[Clojure] project and a developer of the http://datomic.com/[Datomic database].
+
+...
+
+Learn more about Stu's presentations on his https://github.com/stuarthalloway/presentations/wiki[wiki].
+----
+////

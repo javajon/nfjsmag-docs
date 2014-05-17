@@ -1,0 +1,250 @@
+= Article Title: Optional Article Subtitle
+FirstName LastName <username@example.com>
+:css-signature: learning-to-go-part-1
+:slug:
+:description:
+:keywords:
+:slug:
+ifndef::codedir[:codedir: code]
+ifndef::imagesdir[:imagesdir: images]
+:asciidoc-syntax-reference-uri: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+:asciidoctor-user-manual-uri: http://asciidoctor.org/docs/user-manual/
+:jenkins-uri: http://jenkins-ci.org
+
+[abstract]
+--
+The abstract is a concise overview of your article.
+In one or two paragraphs, the abstract should describe the key topics and solutions your article covers.
+
+Another way to determine what should be included in your abstract: what are the two or three big facts/messages/takeaways a reader will learn from your article?
+--
+
+== First Section Title
+
+Each section within your article must be titled.
+Enter a blank line beneath each title and then start writing the section's content.
+Most of your article content will be in paragraph form.
+
+=== Nested Section Title
+
+The section title above is classified as a level-2 section title.
+It is the equivalent of an +<h3>+ tagged title.
+
+==== Level-3 Section Title
+
+The section title above is the equivalent of an +<h4>+ tagged title.
+
+=== Links
+
+* Suggest using attribute entries for the link URI if used more than once
+
+=== Special Content Blocks
+
+Content that should be displayed using a special style or layout is included in delimited blocks.
+
+The available delimited blocks include:
+
+* Source code
+* Example
+* Blockquote
+* Sidebar
+* Literal
+* Open
+
+== Second Level-1 Section Title
+
+Show me an image and a figure!
+And don't forget how to title them and how to reference them in the text.  Figure MDA-1
+
+* Image paths should be relative to the images directory!
+* Image titles should be placed above the image macro following a leading dot
+* Bold the comment about using the block image macro instead of the inline image macro
+* Should titles end in a period?
+
+== Blocks
+
+Blocks add pizzazz
+
+=== Source Code
+
+CAUTION: Don't forget how to lable and reference in the text. (Listing MDA-1)
+
+* If most of your code examples are in one language, you can set the +:language:+ attribute entry in the header and leave off the language of the source style
+* Strongly recommend that code be included rather than inlined
+* Show syntax for including a tagged region of a file
+* Should titles end in a period?
+
+Source code is present in a listing block which is delimited by four hyphens.
+
+.A greedy groovy coin changer
+[source,groovy]
+----
+include::{codedir}/GreedyCoinChanger.groovy[]
+----
+
+.Source code callout example
+[source]
+....
+.Query and Local Processing
+[source,java]
+----
+db = conn.db();
+List partialAnswer = q(queryPartA, db); // \<1>
+List enhanced = localProcess(partialAnswer); // \<2>
+List finalResult = q(queryPartB, db, enhanced); // \<3>
+----
+<1> Define the query
+<2> Do some local processing
+<3> Build on first query, still consistent!
+....
+
+[TIP]
+====
+As shown in the example, you can put the callout behind a line comment in most programming languages to avoid causing a syntax error in the raw source code.
+
+In XML, the syntax of the commented callout should be `<!--n-->`, where _n_ is the callout index.
+====
+
+Console commands should be indented by a single space and begin with a dollar sign ($) followed by a space.
+Using this convention provides the semantics to allow us to style them appropriately.
+
+.Console command example
+[source]
+----
+ $ gem install asciidoctor
+----
+
+If you need to display a few lines of console output, put it on a line that begins with a hash (#) followed by a space.
+
+.Console command example with output
+[source]
+----
+ $ file -b --mime-encoding article.adoc
+ # utf-8
+----
+
+If you need to display many lines of console output, use a separate literal block.
+
+.Console command example followed by console output
+[source]
+----
+ $ mvn compile
+
+.Command output
+....
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building asciidoctorj 1.5.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] - maven-enforcer-plugin:1.0:enforce (enforce-maven) @ asciidoctorj
+[INFO]
+[INFO] - gem-maven-plugin:1.0.0-rc4:initialize (default) @ asciidoctorj
+[INFO]
+[INFO] - maven-resources-plugin:2.5:resources (default-resources) @ asciidoctorj
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO]
+[INFO] - maven-compiler-plugin:3.1:compile (default-compile) @ asciidoctorj
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+....
+----
+
+=== Blockquote
+
+Don't forget citations.
+
+* Recommend either air quotes form or Markdown style
+* Strongly recommend that quotes be cited, show example
+
+=== Sidebar
+
+When to use and a title
+
+=== Example
+
+When to use and a title
+
+=== Open
+
+When to use and a title
+
+== Admonitions
+
+When to use and a title
+Plus the short and block form
+
+== Lining Up Your Content
+
+Content with obsessive cumpolsive disorder can feel secure within the structure of a list or table.
+
+=== Lists
+
+Content can also be presented as unordered, ordered and definition lists.
+
+This is an unordered list with nested levels and a title:
+
+.Title of list
+* List item 1
+** Nested list item
+*** Nested nested list item
+* List item 2
+
+This is an ordered list with nested levels:
+
+. List item 1
+.. Nested list item
+. List item 2
+.. Nested list item
+... Nested nested list item
+
+This is a definition list:
+
+Word:: Description of word
+CPU:: The brain of the computer.
+
+TIP: Lists can contain complex content such as delimited blocks.
+See the {asciidoc-syntax-reference-uri}[AsciiDoc syntax quick reference] or {asciidoctor-user-manual-uri}[the Asciidoctor user manual].
+
+=== Tables
+
+----
+|===
+|Name of Column 1 |Name of Column 2
+
+|Cell in column 1, row 1
+|Cell in column 2, row 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+----
+
+* Use the list-like (“stacked cell”) format
+* Use the implicit header
+* Set relative column widths
+
+== Another Section Title
+
+Need the following examples:
+
+
+* `[path]_foo/bar_`
+* `pass:[`]`
+* backticks
+* rich text
+* Math
+* UML
+
+== Endnotes
+
+== References
+
+[bibliography]
+== Resources
+
+include::bio.adoc[]
