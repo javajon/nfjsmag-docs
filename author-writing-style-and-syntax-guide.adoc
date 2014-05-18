@@ -1,7 +1,7 @@
 = Writing Style and Syntax Guide
 :toc:
 :experimental:
-:source-highlighter: coderay
+//:source-highlighter: coderay
 :language: asciidoc
 :example-caption!:
 :pre-uri: http://en.wikipedia.org/wiki/List_of_English_prepositions
@@ -166,12 +166,12 @@ ACTION: Parts - arabic or roman numerals?
 .Header syntax
 [source]
 ----
-= iOS Development in Ruby with RubyMotion, Part 3: Backend as a Service // <1> <2> <3>
-Brian Sam-Bodden <bsbodden@integrallis.com> // <4> <5>
+= iOS Development in Ruby with RubyMotion, Part 3: Backend as a Service <1> <2> <3>
+Brian Sam-Bodden <bsbodden@integrallis.com> <4> <5>
 :css-signature: rubymotion-3
-:slug: mobileDev // <6>
-:description: In this part of the RubyMotion series, learn how to connect a simple iOS application to a Parse backend in order to provide a server-side component to a mobile offering. // <7>
-:keywords: Ruby, iOS, Parse, mobile // <8>
+:slug: mobileDev <6>
+:description: In this part of the RubyMotion series, learn how to connect a simple iOS application to a Parse backend in order to provide a server-side component to a mobile offering. <7>
+:keywords: Ruby, iOS, Parse, mobile <8>
 ifndef::codedir[:codedir: code]
 ifndef::imagesdir[:imagesdir: images]
 :hide-uri-scheme:
@@ -189,7 +189,7 @@ ifndef::imagesdir[:imagesdir: images]
 [source]
 ----
 = It's the End of the Cloud as We Know It
-Andy Piper <apiper@gopivotal.com>; Matt Stine <matt.stine@gmail.com> // <1>
+Andy Piper <apiper@gopivotal.com>; Matt Stine <matt.stine@gmail.com> <1>
 ----
 <1> Multiple author names and emails are listed on the same line and separated by a semicolon followed by one space.
 
@@ -265,9 +265,9 @@ Within the normal content of your article, *please use curved quotation marks* (
 
 .Curved quotes syntax
 ----
-`single curved quotes' // <1>
+`single curved quotes' <1>
 
-``double curved quotes'' // <2>
+``double curved quotes'' <2>
 ----
 <1> One leading backtick (+{backtick}+) and one trailing single quote (+{apos}+) around a word or phrase encloses it in single curved quotes.
 <2> Two leading backticks (+{backtick}{backtick}+) and two trailing single quotes (+{apos}{apos}+) around a word or phrase encloses it in double curved quotes.
@@ -283,9 +283,9 @@ Separate the abstract from the header with a single blank line.
 .Abstract syntax
 [source]
 ----
-[abstract] // <1> <2>
--- // <3>
-Spring Boot offers a greatly simplified development model for Spring that requires little or no configuration. // <2>
+[abstract] <1> <2>
+-- <3>
+Spring Boot offers a greatly simplified development model for Spring that requires little or no configuration. <2>
 This article picks up where last month's article left off, showing more Spring Boot tips and tricks.
 --
 ----
@@ -361,9 +361,9 @@ If you find yourself using bold text at the beginning of a list item, consider u
 .Definition list
 [source]
 ----
-CPU:: // <1>
-The brain of the computer. // <2>
-// <3>
+CPU:: <1>
+The brain of the computer. <2>
+<3>
 Hard drive::
 Permanent storage for operating system and/or user files.
 ----
@@ -428,10 +428,10 @@ Tabs are criminal.
 +
 .Source code block syntax
 ....
-.A greedy groovy coin changer // <1>
-[source,groovy] // <2> <3>
----- // <4>
-include::{codedir}/GreedyCoinChanger.groovy[] // <5> <6>
+.A greedy groovy coin changer <1>
+[source,groovy] <2> <3>
+---- <4>
+include::{codedir}/GreedyCoinChanger.groovy[] <5> <6>
 ----
 ....
 <1> Listing captions are preceded with a period (+.+). See Section xxx for more information about writing captions.
@@ -447,8 +447,8 @@ You can also apply the literal and monospace styles to one or two lines of code 
 .Literal (monospace) style
 ----
 Let's add it to our project's Gemfile and bundle the application.
-// <1>
- gem 'motion-cocoapods' // <2>
+<1>
+ gem 'motion-cocoapods' <2>
 ----
 <1> Insert a single blank line between the previous element and the source code.
 <2> To implicitly use the literal style, indent the line of code by one space from the left margin.
@@ -496,18 +496,18 @@ The example below shows how you tag a region of content inside a file containing
 [source,java]
 ----
 public class Routing {
-  //tag::methods[] // <1> <2>
+  // tag::methods[] // <1> <2>
   public String concat(String op1, String op2) { return op1 + op2; }
   public static String combine(String op1, String op2) { return op1 + op2; }
-  //end::methods[] // <3> <4>
+  // end::methods[] // <3> <4>
 
   public static void main(String[] args) {
     List<String> names = Arrays.asList("Matt", "Brian", "Nate", "Ken");
 
-    //tag::asArgLambda[] // <5>
+    // tag::asArgLambda[] // <5>
     names.forEach(name -> System.out.println(name));
     names.forEach(name -> String.valueOf(name));
-    //end::asArgLambda[]
+    // end::asArgLambda[]
 ----
 <1> To specify the beginning of a tagged region, insert a comment line in the code.
 <2> Assign a unique name to the +tag::[]+ macro. This tag is called _methods_.
@@ -519,7 +519,7 @@ public class Routing {
 ....
 [source,java]
 ----
-include::{codedir}/Routing.java[tag=asArgLambda] // <1>
+include::{codedir}/Routing.java[tag=asArgLambda] <1>
 ----
 ....
 <1> In the function's brackets, set the +tag+ attribute and assign it the unique name of the code snippet you tagged in you code file.
@@ -581,10 +581,10 @@ If you need to display several lines of console output, insert it in a literal b
 .Console command followed by console output
 [source]
 ----
- $ mvn compile // <1>
+ $ mvn compile <1>
 
-.Command output // <2>
-.... // <3>
+.Command output <2>
+.... <3>
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
@@ -644,7 +644,7 @@ Mark a single paragraph as an admonition by inserting a label on the first line 
 
 .Admonition paragraph
 ----
-NOTE: An admonition draws the reader's attention to auxiliary information. // <1> <2>
+NOTE: An admonition draws the reader's attention to auxiliary information. <1> <2>
 Its purpose is determined by the label at the beginning of the paragraph.
 ----
 <1> The label must be uppercase and immediately followed by a colon (+:+).
@@ -655,8 +655,8 @@ Style complex content as an admonition by placing it in an example block.
 .Delimited admonition block
 [source]
 ----
-[TIP] // <1>
-==== // <2>
+[TIP] <1>
+==== <2>
 * one
 * two
 * three
@@ -675,8 +675,8 @@ Sidebars can contain any type of content such as source code and images.
 
 .Delimited sidebar block
 ----
-.Play Framework Provides Fast Feedback // <1>
-****
+.Play Framework Provides Fast Feedback <1>
+**** <2>
 Play Framework is a MVC framework written in Scala.
 It provides both Scala and Java API's to developers.
 You can mix both Java and Scala when building your application.
@@ -694,9 +694,9 @@ If the quote or excerpt is a single element, you can set the attribute list dire
 .Quote paragraph
 [source]
 ----
-.After landing the cloaked Klingon bird of prey in Golden Gate park: // <1>
-[quote, Captain James T. Kirk, Star Trek IV: The Voyage Home] // <2> <3> <4>
-Everybody remember where we parked. // <5>
+.After landing the cloaked Klingon bird of prey in Golden Gate park: <1>
+[quote, Captain James T. Kirk, Star Trek IV: The Voyage Home] <2> <3> <4>
+Everybody remember where we parked. <5>
 ----
 <1> Mark lead-in text explaining the context or setting of the quote using a period (+.+). (optional)
 <2> For content that doesn't require the preservation of line breaks, set +quote+ in the first position of the attribute list.
@@ -709,8 +709,8 @@ Place complex quote and excerpt content inside a quote block.
 .Delimited quote block
 [source]
 ----
-[quote, Monty Python and the Holy Grail] // <1>
-____ // <2>
+[quote, Monty Python and the Holy Grail] <1>
+____ <2>
 Dennis: Come and see the violence inherent in the system. Help! Help! I'm being repressed!
 
 King Arthur: Bloody peasant!
@@ -742,8 +742,8 @@ Photographs, screenshots and graphics not created with PlantUML or Graphviz are 
 
 .Image macro anatomy
 ----
-.Figure or image caption // <1>
-image::image_name.jpg[] // <2> <3>
+.Figure or image caption <1>
+image::image_name.jpg[] <2> <3>
 ----
 <1> Place the image's caption above the macro directly after a leading dot (+.+).
 <2> Set the +image::+ macro and the image's file name.
@@ -766,15 +766,15 @@ We recommend that you assign URLs to document attributes in order to keep your a
 = iOS Development in Ruby with RubyMotion, Part 3: Backend as a Service
 [...]
 ifndef::imagesdir[:imagesdir: images]
-:hide-uri-scheme: // <1>
-:parse-uri: https://parse.com // <2>
+:hide-uri-scheme: <1>
+:parse-uri: https://parse.com <2>
 :sansref-uri: http://www.rubymotion.com/developer-center/guides/project-management/#_vendoring_3rd_party_libraries
 
-One such service, and the focus of this article, is {parse-uri}[Parse]. // <3>
+One such service, and the focus of this article, is {parse-uri}[Parse]. <3>
 
 [...]
 
-- Sansonetti, Laurent. _RubyMotion Project Management Guide_. {sansref-uri}. // <4>
+- Sansonetti, Laurent. _RubyMotion Project Management Guide_. {sansref-uri}. <4>
 ----
 <1> Set the +hide-uri-scheme+ attribute when you need to include a URL in the text without link text and without the scheme (i.e., pass:[http://]).
 <2> Assign the URL to an attribute.
@@ -854,11 +854,11 @@ For the best user experience, table cells should not contain paragraphs of text 
 ----
 [[table-id]]
 .Title of Table
-|=== // <1>
-|Name of Column 1 |Name of Column 2 // <2> <3>
-// <4>
+|=== <1>
+|Name of Column 1 |Name of Column 2 <2> <3>
+<4>
 |Cell in column 1, row 1
-|Cell in column 2, row 1 // <5>
+|Cell in column 2, row 1 <5>
 
 |Cell in column 1, row 2
 |Cell in column 2, row 2
@@ -904,11 +904,11 @@ If you plan to reference a footnote more than once, use the ID footnote macro (`
 [source]
 ----
 Protocols allow us to wire up abstractions in ways that the original authors of a type could not have conceived.
-So the next time we hear our colleagues complain about the “expression problem” we can share a knowing smile.footnote:[The expression problem, put succinctly, is twofold: we should have the ability to define new types based on existing contracts (which a language like Java lets us do via extends and implements) and the ability to take existing types and make them conform new contracts. The second part is beautifully implemented in Clojure via protocols.] // <1> <2>
+So the next time we hear our colleagues complain about the “expression problem” we can share a knowing smile.footnote:[The expression problem, put succinctly, is twofold: we should have the ability to define new types based on existing contracts (which a language like Java lets us do via extends and implements) and the ability to take existing types and make them conform new contracts. The second part is beautifully implemented in Clojure via protocols.] <1> <2>
 
-A bold statement.footnoteref:[disclaimer,These opinions are my own.] // <3> <4>
+A bold statement.footnoteref:[disclaimer,These opinions are my own.] <3> <4>
 
-Another bold statement.footnoteref:[disclaimer] // <5>
+Another bold statement.footnoteref:[disclaimer] <5>
 ----
 <1> Insert the footnote macro directly after any punctuation. Note that the footnote macro only uses one colon.
 <2> Insert the footnote's content within the square brackets of the macro. The text may span several lines.
@@ -945,7 +945,7 @@ Parenthetical citations typically include the author’s last name, year of publ
 .Parenthetical citation syntax
 [source]
 ----
-This is a sentence. (<<ref-entry-id,author-last-name year>>) // <1> <2> <3> <4>
+This is a sentence. (<<ref-entry-id,author-last-name year>>) <1> <2> <3> <4>
 ----
 <1> Parenthetical citations are enclosed in a set of parentheses and a double set of angled brackets.
 <2> The reference entry ID is a unique identifier you create. The citation and the corresponding reference entry must share the same ID.
@@ -958,7 +958,7 @@ The list of reference entries should appear in alphabetical order by primary aut
 .Reference entry syntax
 [source]
 ----
-- [[[ref-entry-id]]] Last-name, first-name. publication-year. _title_. publisher. // <1> <2>
+- [[[ref-entry-id]]] Last-name, first-name. publication-year. _title_. publisher. <1> <2>
 ----
 <1> Entries that correspond to a parenthetical citation must have a reference entry ID. Enclose the ID in a triple set of square brackets.
 <2> Separate the ID from the reference entry by a single space.
@@ -973,19 +973,19 @@ Each parenthetical citation is accompanied by an example of a corresponding refe
 .Parenthetical citations and reference entries for printed and digital books
 [source]
 ----
-... improvements to the support for concurrent code execution on multicore hardware in iOS and OS X. (<<appleref,Apple 2013>>) // <1>
-... the pros and cons of each of these options must be weighed. (<<chaconref,Chacon 2009, chap. 2>>) // <2>
-... transform them into a habit and eventually mastery. (<<kellerref,Keller and Papasan 2013, 113-114>>) // <3>
-Years ago I read the famous book by William Zinsser, On Writing Well, 25th Anniversary: The Classic Guide to Writing Nonfiction. // <4>
+... improvements to the support for concurrent code execution on multicore hardware in iOS and OS X. (<<appleref,Apple 2013>>) <1>
+... the pros and cons of each of these options must be weighed. (<<chaconref,Chacon 2009, chap. 2>>) <2>
+... transform them into a habit and eventually mastery. (<<kellerref,Keller and Papasan 2013, 113-114>>) <3>
+Years ago I read the famous book by William Zinsser, On Writing Well, 25th Anniversary: The Classic Guide to Writing Nonfiction. <4>
 
-[bibliography] // <5>
+[bibliography] <5>
 == References
 
 [bibliography]
-- [[[appleref]]] Apple. 2013. _Grand Central Dispatch Reference_. Last modified December 12, 2013. {gcdref-uri}. // <6> <7>
-- [[[chaconref]]] Chacon, Scott. 2009. _Pro Git_. Apress. http://git-scm.com/book. // <8>
-- Cohn, Mike. 2010. _Succeeding with Agile: Software Development Using Scrum_. Addison-Wesley. Kindle edition. // <9>
-- [[[kellerref]]] Keller, Gary, and Jay Papasan. 2013. _The ONE Thing: The Surprisingly Simple Truth Behind Extraordinary Results_. Bard Press. // <10>
+- [[[appleref]]] Apple. 2013. _Grand Central Dispatch Reference_. Last modified December 12, 2013. {gcdref-uri}. <6> <7>
+- [[[chaconref]]] Chacon, Scott. 2009. _Pro Git_. Apress. http://git-scm.com/book. <8>
+- Cohn, Mike. 2010. _Succeeding with Agile: Software Development Using Scrum_. Addison-Wesley. Kindle edition. <9>
+- [[[kellerref]]] Keller, Gary, and Jay Papasan. 2013. _The ONE Thing: The Surprisingly Simple Truth Behind Extraordinary Results_. Bard Press. <10>
 - Zinsser, William. 2001. _On Writing Well, 25th Anniversary: The Classic Guide to Writing Nonfiction_. New York: Harper Resource.
 ----
 <1> Parenthetical citation for a corporate reference.
@@ -1004,9 +1004,9 @@ However, their reference entries include additional information and different fo
 
 .Journal and blog post reference entries
 ----
-- Fowler, Martin. 2005. ``CommandQuerySeparation.'' Accessed August 15. http://martinfowler.com/bliki/CommandQuerySeparation.html. // <1>
-- Kossinets, Gueorgi, and Duncan J. Watts. 2009. ``Origins of Homophily in an Evolving Social Network.'' _American Journal of Sociology_ 115:405–50. Accessed February 28, 2010. doi:10.1086/599247. // <2>
-- Weinstein, Joshua I. 2009. ``The Market in Plato’s Republic.'' _Classical Philology_ 104:439–58. // <3>
+- Fowler, Martin. 2005. ``CommandQuerySeparation.'' Accessed August 15. http://martinfowler.com/bliki/CommandQuerySeparation.html. <1>
+- Kossinets, Gueorgi, and Duncan J. Watts. 2009. ``Origins of Homophily in an Evolving Social Network.'' _American Journal of Sociology_ 115:405–50. Accessed February 28, 2010. doi:10.1086/599247. <2>
+- Weinstein, Joshua I. 2009. ``The Market in Plato’s Republic.'' _Classical Philology_ 104:439–58. <3>
 ----
 <1> Blog entries may be cited as part of the article's text (``In Martin Fowler's May 5, 2005 blog post...'') and omitted from the References section. If the citation isn't part of the text, enter a parenthetical citations and reference list entry. Blog post comments should only be cited in the article's text.
 <2> An article in an online journal. If the online journal article does not have a DOI number, use the web page URL where the article was accessed.
