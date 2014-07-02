@@ -4,11 +4,25 @@
 //:source-highlighter: coderay
 :language: asciidoc
 :example-caption!:
+:underscore: _
+:adoc-qr: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference
+:adoc: http://asciidoctor.org/docs/user-manual
 :pre-uri: http://en.wikipedia.org/wiki/List_of_English_prepositions
-:subs-uri: http://asciidoctor.org/docs/user-manual/#text-substitutions
+:subs-uri: {adoc}/#text-substitutions
 :cms-samples-uri: http://www.chicagomanualofstyle.org/tools_citationguide.html
 :pygments-uri: http://pygments.org/languages/
-:table-uri: http://asciidoctor.org/docs/user-manual/#tables
+:table-uri: {adoc}/#tables
+:format-uri: {adoc}/#text-formatting
+:sect: {adoc}/#sections
+:llist: {adoc}/#labeled-list
+:olist: {adoc}/#ordered-lists
+:ulist: {adoc}/#unordered-lists
+:role: {adoc}/#role
+:fnote: {adoc}/#user-footnotes
+:column: {adoc}/#column-specifiers
+:cell: {adoc}/#cell-specifiers
+:grid: {adoc}/#table-lines-placement-and-size
+:t-format: {adoc}/#data-formats
 
 This guide describes NFJS, the Magazine's preferred tone, structure, and grammar styles.
 When applicable, it provides examples of the corresponding AsciiDoc syntax.
@@ -193,7 +207,7 @@ Andy Piper <apiper@gopivotal.com>; Matt Stine <matt.stine@gmail.com> <1>
 ----
 <1> Multiple author names and emails are listed on the same line and separated by a semicolon followed by one space.
 
-== Paragraphs
+== Text
 
 To begin a new paragraph, separate it by one blank line from the element above it.
 Do not indent the first line of a paragraph.
@@ -247,18 +261,6 @@ Then load the April 2014 issue of NFJS, the Magazine, and have it read.
 Now you can hear when one sentence ends and another begins.
 ****
 
-=== Text Formatting
-
-Individual words or phrases are formatted when bound within a single set of syntax symbols.
-Characters which are not bound by white space must be marked by a double set of syntax symbols.
-
-.Italic and bold syntax
-----
-_italic phrase_ and le__tt__ers
-
-*bold phrase* and le**tt**ers
-----
-
 === Punctuation and Unicode
 
 Within the normal content of your article, *please use curved quotation marks* (also known as smart quotes).
@@ -295,7 +297,7 @@ This article picks up where last month's article left off, showing more Spring B
 
 TIP: If the abstract is a single paragraph, you don't need to enclose it in an open block.
 
-== Section Titles and Levels
+== Section Titles
 
 Section titles reflect the main topic or important message of a section's content.
 The titles should be capitalized <<headline,headline style>>.
@@ -311,41 +313,19 @@ The titles should be capitalized <<headline,headline style>>.
 * Lowercase proper nouns that are lowercased in the text (@object, motion-cocoapods).
 ****
 
-Section title levels are specified by two to six equal signs.
-The number of equal signs represents the nesting level (using a 0-based index) of the title.
-For example, to designate a level two section title, which is the equivalent to an `<h3>` HTML tag, use three equal signs (+===+).
-Section levels must be nested logically (i.e., you can't nest a level 5 section directly in a level 3 section.
-
-.Section level syntax
-[source]
-----
-= Article (Document) Title (Level 0, H1)
-
-== Level 1 Section Title (H2)
-
-Text.
-
-=== Level 2 Section Title (H3)
-
-Text.
-
-==== Level 3 Section Title (H4)
-
-Text.
-
-== Another Level 1 Section Title
-
-Text.
-----
-
 [WARNING]
 ====
 *Do not* use the _setext_ markup style for headings.
 ====
 
+.Section Level and Title Syntax Help
+--
+- {sect}[Sections]
+--
+
 == Terms and Definitions
 
-The first time you present and define a concept that is vital to your article or that your readers may not be familiar with, annotate it with `[.term]` and enclose the word or phrase with <<italic_and_bold,emphasis marks>>.
+The first time you present and define a concept that is vital to your article or that your readers may not be familiar with, annotate it with `[.term]` and enclose the word or phrase with italic marks (+{underscore}+).
 
 .Inline term
 [source]
@@ -353,52 +333,20 @@ The first time you present and define a concept that is vital to your article or
 In Java 8, [.term]_lambda expressions_ are anonymous functions that can stand in where instances of single abstract method interfaces are expected.
 ----
 
-If you're defining multiple concepts in a row, use a definition list.
+If you're defining multiple concepts in a row, use a labeled list (also known as a definition list).
 You don't need to apply the term role or italic formatting to terms in a definition list.
 
-If you find yourself using bold text at the beginning of a list item, consider using a definition list.
+// Also you find yourself using bold text at the beginning of a list item, consider using a labeled list.
 
-.Definition list
-[source]
-----
-CPU:: <1>
-The brain of the computer. <2>
-<3>
-Hard drive::
-Permanent storage for operating system and/or user files.
-----
-<1> Follow each term with two colons.
-<2> Enter the definition text on a new line below the term.
-<3> Enter a single blank line between each term/definition pair.
+.List Syntax Help
+--
+- {llist}[Labeled Lists]
+- {olist}[Ordered Lists]
+- {ulist}[Unordered Lists]
+- {role}[Roles]
+--
 
-== Lists
-
-In addition to definition lists, content can also be presented as unordered and ordered lists.
-
-Single level unordered list items can be marked with a hyphen (+-+).
-Nested unordered list items must be marked with asterisks.
-
-.Unordered list with nested list items
-[source]
-----
-.Optional Title of List
-* List item
-** Nested list item
-*** Nested nested list item
-* List item
-----
-
-Ordered list items are marked with a period (+.+).
-
-.Ordered list with nested list items
-[source]
-----
-. List item
-. List item
-.. Nested list item
-... Nested nested list item
-. List item
-----
+// TODO: Need the stacked and custom styles for lists
 
 == Source Code and Program Output
 
@@ -834,54 +782,43 @@ Press the btn:[OK] button when you are finished.
 
 Pending
 
-=== Subscript and Superscript
-
-Text is subscripted when you enclose it in a set of tildes (+{tilde}+) and superscripted with a set of carets (+{caret}+)
-
-.Superscript and subscript syntax
-----
-^super^script
-
-~sub~script
-----
-
 == Tables
 
 Use tables for tabular data only.
 Do not use tables for transcripts, chronologies, lists, sidebars, or any other formatting purposes.
 For the best user experience, table cells should not contain paragraphs of text or images.
 
+Title your tables using <<headline,headline style>>.
+Titles should be as succinct as possible and should not suggest any interpretation of the data.
+Important explanatory or statistical information may be included in parentheses in a title, but don't use headline-style capitalization for such material.
+
 ----
-[[table-id]]
-.Title of Table
-|=== <1>
-|Name of Column 1 |Name of Column 2 <2> <3>
-<4>
+[[table-id]] <1>
+.Title of Table <2>
+|=== <3>
+|Name of Column 1 |Name of Column 2 <4> <5>
+<6>
 |Cell in column 1, row 1
-|Cell in column 2, row 1 <5>
+|Cell in column 2, row 1 <7>
 
 |Cell in column 1, row 2
 |Cell in column 2, row 2
 |===
 ----
-<1> The table’s content boundaries are defined by a vertical bar and three equal signs (`|===`).
-<2> A new cell is marked by a vertical bar (`|`).
-<3> The first row of a table is rendered as a header row. Enter all of the cells of the header row on a single line. The number of cells in the first line directly following the table delimiter implicitly indicates the number of columns the table contains.
-<4> Rows are separated by blank lines.
-<5> Consecutively stack the cells of non-header rows.
+<1> Give the table a unique id if you want to directly or parenthetically cite the table to your article's text.
+<2> Tables should have titles.
+<3> The table’s content boundaries are defined by a vertical bar and three equal signs (`|===`).
+<4> A new cell is marked by a vertical bar (`|`).
+<5> The first row of a table is rendered as a header row. Enter all of the cells of the header row on a single line. The number of cells in the first line directly following the table delimiter implicitly indicates the number of columns the table contains.
+<6> Rows are separated by blank lines.
+<7> Consecutively stack the cells of non-header rows.
 
-TIP: Leading and trailing spaces around the content in a cell are stripped; therefore, they don’t affect the table’s layout when it is rendered.
-
-Tables should have titles.
-Titles should be as succinct as possible and should not suggest any interpretation of the data.
-Capitalize the title in <<headline,headline style>>.
-Important explanatory or statistical information may be included in parentheses in a title.
-Don't use headline-style capitalization for such material.
-Cite each table in the text, either directly or parenthetically.
+// Cite each table in the text, either directly or parenthetically.
 
 .UX #Fail
 [WARNING]
 ====
+* Tables should not be images.
 * Do not create tables with more than *24 rows*.
 * A row can not contain more than *60 characters*.
 
@@ -889,48 +826,23 @@ Tables that exceed these length and width restrictions will not display correctl
 Also, large tables are difficult to view and navigate on devices with small displays.
 ====
 
-TIP: Table columns and rows can be manipulated in a plethora of ways.
-See the {table-uri}[Asciidoctor User Manual] for examples of additional column and cell attributes.
+.Table Syntax Help
+--
+- {column}[Column Formatting]
+- {cell}[Cell Formatting]
+- {grid}[Table Lines, Placement, and Size]
+- {t-format}[CSV and DSV Data]
+--
 
 == Footnotes
 
 Footnotes provide additional narrative or author comments.
 Do not use them for <<bibliography,citations>> or <<urls_and_cross_references,URLs>>.
 
-A footnote is created with the footnote macro (`footnote:[]`).
-If you plan to reference a footnote more than once, use the ID footnote macro (`footnoteref:[]`).
-
-.Footnote and footnoteref syntax
-[source]
-----
-Protocols allow us to wire up abstractions in ways that the original authors of a type could not have conceived.
-So the next time we hear our colleagues complain about the “expression problem” we can share a knowing smile.footnote:[The expression problem, put succinctly, is twofold: we should have the ability to define new types based on existing contracts (which a language like Java lets us do via extends and implements) and the ability to take existing types and make them conform new contracts. The second part is beautifully implemented in Clojure via protocols.] <1> <2>
-
-A bold statement.footnoteref:[disclaimer,These opinions are my own.] <3> <4>
-
-Another bold statement.footnoteref:[disclaimer] <5>
-----
-<1> Insert the footnote macro directly after any punctuation. Note that the footnote macro only uses one colon.
-<2> Insert the footnote's content within the square brackets of the macro. The text may span several lines.
-<3> The first time you enter a footnote you want to reuse, give it a unique ID in the first position.
-<4> Separate the ID from the footnote text with a comma. Do not enter a space between the comma and the footnote text.
-<5> The next time you reference the footnote you only need to insert the ID in the square brackets.
-
-When rendered, the footnotes will be numbered consecutively throughout the article.
-
-.Rendered footnotes
-====
-[.unstyled]
-|===
-a|
-Protocols allow us to wire up abstractions in ways that the original authors of a type could not have conceived.
-So the next time we hear our colleagues complain about the “expression problem” we can share a knowing smile.footnote:[The expression problem, put succinctly, is twofold: we should have the ability to define new types based on existing contracts (which a language like Java lets us do via extends and implements) and the ability to take existing types and make them conform new contracts. The second part is beautifully implemented in Clojure via protocols.]
-
-A bold statement.footnoteref:[disclaimer,These opinions are my own.]
-
-Another bold statement.footnoteref:[disclaimer]
-|===
-====
+.Footnote Syntax Help
+--
+- {fnote}[Footnote Macro]
+--
 
 == Resources
 
