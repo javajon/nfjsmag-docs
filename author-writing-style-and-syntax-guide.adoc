@@ -23,6 +23,16 @@
 :cell: {adoc}/#cell-specifiers
 :grid: {adoc}/#table-lines-placement-and-size
 :t-format: {adoc}/#data-formats
+:admon: {adoc}/#admonition
+:sidebar: {adoc}/#sidebar
+:ui: {adoc}/#user-interface-macros
+:quote: {adoc}/#prose-excerpts-quotes-and-verses
+:verse: {adoc}/#verse
+:mono: {adoc}/#monospace
+:btick: {adoc}#passthru
+:ltext: {adoc}/#literal-text-and-blocks
+:listing: {adoc}/#listing-blocks
+:idir: {adoc}/#include-directive
 
 This guide describes NFJS, the Magazine's preferred tone, structure, and grammar styles.
 When applicable, it provides examples of the corresponding AsciiDoc syntax.
@@ -101,6 +111,8 @@ Delimited Block::
 An element where a set of attributes are implicitly set when the parser encounters a line of two or four continuous symbols and unset when it encounters a second line of the same four symbols.
 The line of symbols is called a delimiter.
 
+////
+
 === Delimited Block Types
 
 With the exception of open blocks, all delimiter lines consist of precisely *four* characters.
@@ -157,6 +169,7 @@ You can learn more about substitutions in the {subs-uri}[Asciidoctor User Manual
 h|Normal   |Yes                 |Yes    |Yes        |Yes          |Yes    |Yes               |No
 h|Verbatim |Yes                 |No     |No         |No           |No     |No                |Yes
 |===
+////
 
 == Title, Author, and Article Metadata
 
@@ -319,9 +332,9 @@ The titles should be capitalized <<headline,headline style>>.
 ====
 
 .Section Level and Title Syntax Help
---
+****
 - {sect}[Sections]
---
+****
 
 == Terms and Definitions
 
@@ -339,12 +352,12 @@ You don't need to apply the term role or italic formatting to terms in a definit
 // Also you find yourself using bold text at the beginning of a list item, consider using a labeled list.
 
 .List Syntax Help
---
+****
 - {llist}[Labeled Lists]
 - {olist}[Ordered Lists]
 - {ulist}[Unordered Lists]
 - {role}[Roles]
---
+****
 
 // TODO: Need the stacked and custom styles for lists
 
@@ -400,6 +413,15 @@ Let's add it to our project's Gemfile and bundle the application.
 ----
 <1> Insert a single blank line between the previous element and the source code.
 <2> To implicitly use the literal style, indent the line of code by one space from the left margin.
+
+.Literal Text, Listings, and Includes Syntax Help
+****
+- {mono}[Monospace Formatting]
+- {btick}[Backtick Passthroughs]
+- {ltext}[Literal Paragraphs]
+- {listing}[Listing Blocks]
+- {idir}[Include Directives]
+****
 
 === Callouts
 
@@ -588,98 +610,33 @@ There are five available labels:
 * +CAUTION+
 * +WARNING+
 
-Mark a single paragraph as an admonition by inserting a label on the first line of the paragraph.
-
-.Admonition paragraph
-----
-NOTE: An admonition draws the reader's attention to auxiliary information. <1> <2>
-Its purpose is determined by the label at the beginning of the paragraph.
-----
-<1> The label must be uppercase and immediately followed by a colon (+:+).
-<2> Separate the first line of the paragraph from the label by a single space.
-
-Style complex content as an admonition by placing it in an example block.
-
-.Delimited admonition block
-[source]
-----
-[TIP] <1>
-==== <2>
-* one
-* two
-* three
-
-A paragraph.
-====
-----
-<1> Set the label in an attribute list on a delimited block. The label must be uppercase.
-<2> Admonition styles are commonly set on example blocks. Example blocks are delimited by four equal signs (+====+).
+.Admonition Paragraph and Block Syntax Help
+****
+- {admon}[Admonitions]
+****
 
 == Sidebar
 
 Use a sidebar for ancillary content that doesn't fit into the flow of the article's narrative.
-A sidebar must be titled and its contents shouldn't be longer than one or two paragraphs.
-Sidebars can contain any type of content such as source code and images.
+A sidebar must be titled.
+Capitalize the title <<headline,headline style>>.
+The sidebar's contents shouldn't be more than one or two paragraphs.
 
-.Delimited sidebar block
-----
-.Play Framework Provides Fast Feedback <1>
-**** <2>
-Play Framework is a MVC framework written in Scala.
-It provides both Scala and Java API's to developers.
-You can mix both Java and Scala when building your application.
-...
+.Sidebar Syntax Help
 ****
-----
-<1> A title is required. Capitalize the title <<headline,headline style>>.
-<2> A sidebar is delimited by four asterisks (`****`).
+- {sidebar}[Sidebar]
+****
 
 == Quotes, Prose Excerpts, and Verses
 
-The quote and verse styles can be set on paragraphs and delimited quote blocks.
-If the quote or excerpt is a single element, you can set the attribute list directly on top of the content.
+The quote and verse styles can be set on paragraphs and delimited excerpt blocks.
+Include complete attribution and citation information for quotations and prose excerpts.
 
-.Quote paragraph
-[source]
-----
-.After landing the cloaked Klingon bird of prey in Golden Gate park: <1>
-[quote, Captain James T. Kirk, Star Trek IV: The Voyage Home] <2> <3> <4>
-Everybody remember where we parked. <5>
-----
-<1> Mark lead-in text explaining the context or setting of the quote using a period (+.+). (optional)
-<2> For content that doesn't require the preservation of line breaks, set +quote+ in the first position of the attribute list.
-<3> The second position contains who the excerpt is attributed to. (optional)
-<4> Enter additional citation information in the third position. (optional)
-<5> Enter the excerpt or quote text on the line immediately following the attribute list.
-
-Place complex quote and excerpt content inside a quote block.
-
-.Delimited quote block
-[source]
-----
-[quote, Monty Python and the Holy Grail] <1>
-____ <2>
-Dennis: Come and see the violence inherent in the system. Help! Help! I'm being repressed!
-
-King Arthur: Bloody peasant!
-____
-----
-<1> Set the attribute list above the delimiter line.
-<2> A quote block delimiter line consists of four underscores (`____`).
-
-When you need to preserve indents and line breaks, use the +verse+ style.
-
-.Delimited quote block using the verse style
-----
-[verse, Carl Sandburg, Fog]
-____
-The fog comes
-on little cat feet.
-
-It sits looking
-...
-____
-----
+.Quote and Verse Syntax Help
+****
+- {quote}[Excerpts and Quotes]
+- {verse}[Verses]
+****
 
 == The Image Macro
 
@@ -748,7 +705,7 @@ Asciidoctor plans to move to a grammar-based parser in the future, but for now, 
 
 == User Interface Styles
 
-You can represent keyboard shortcuts, menu selections, and UI buttons using the UI macros.
+Use the Asciidoctor UI macros to represent keyboard shortcuts, menu selections, and UI buttons.
 
 Keyboard macro:: `kbd:[key]`
 Menu selection macro:: `menu:menu-name[menu-item]`
@@ -756,27 +713,10 @@ UI button macro::  `btn:[button-name]`
 
 IMPORTANT: You must set the +experimental+ attribute in the document header to enable these macros.
 
-.UI macro syntax
-----
-Press kbd:[Ctrl+Shift+N] to open a new incognito window.
-
-To save the file, select menu:File[Save].
-
-Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
-
-Press the btn:[OK] button when you are finished.
-----
-
-.Rendered UI macros
-====
-Press kbd:[Ctrl+Shift+N] to open a new incognito window.
-
-To save the file, select menu:File[Save].
-
-Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
-
-Press the btn:[OK] button when you are finished.
-====
+.User Interface Macro Syntax Help
+****
+- {ui}[User Interface Macros]
+****
 
 == Mathematical and Chemical Formulas
 
@@ -827,12 +767,12 @@ Also, large tables are difficult to view and navigate on devices with small disp
 ====
 
 .Table Syntax Help
---
+****
 - {column}[Column Formatting]
 - {cell}[Cell Formatting]
 - {grid}[Table Lines, Placement, and Size]
 - {t-format}[CSV and DSV Data]
---
+****
 
 == Footnotes
 
@@ -840,9 +780,9 @@ Footnotes provide additional narrative or author comments.
 Do not use them for <<bibliography,citations>> or <<urls_and_cross_references,URLs>>.
 
 .Footnote Syntax Help
---
+****
 - {fnote}[Footnote Macro]
---
+****
 
 == Resources
 
