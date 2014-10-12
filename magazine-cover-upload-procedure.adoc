@@ -1,0 +1,79 @@
+= Magazine Cover Upload Procedure
+:experimental:
+:icons: font
+
+This guide explains how to add the cover artwork to the repository for a _NFJS, the Magazine_ issue.
+
+== Git setup
+
+Begin by downloading and installing https://mac.github.com[GitHub for Mac].
+Next, walk through the https://help.github.com/articles/first-launch[First Launch] of the Getting Started Guide to get the application set up.
+
+TIP: Refer to the https://mac.github.com/help.html[Getting Started Guide] for additional help performing the steps in this guide.
+
+== Cloning the repository
+
+Once you have GitHub for Mac running, you'll need to clone the repository for a month.
+The repositories are named using the following pattern:
+
+\https://github.com/nofluffjuststuff/nfjsmag-v**V**.**I**
+
+where *V* is the volume number and *I* is the issue number.
+For example, the repository for the October 2014 issue is located at:
+
+https://github.com/nofluffjuststuff/nfjsmag-v6.8
+
+Visit the repository URL in your browser and click the btn:[Clone in Desktop] button to import the repository into GitHub for Mac.
+
+== Open repository in Finder
+
+Once the repository has been imported into GitHub for Mac, you'll want to open the repository folder in Finder.
+
+. Find the repository in the sidebar (i.e., repositories list)
+. Control-click the repository name
+. Select the menu item menu:Open in Finder[]
+
+== Adding files
+
+Copy the following files to the _images/jacket_ folder inside the main repository folder:
+
+* front-cover-no-titles.jpg (1600x2056)
+* back-cover.jpg (1600-2056)
+* front-cover-original.jpg (full size, as designed)
+* back-cover-original.jpg (full size, as designed)
+
+NOTE: The front-cover.jpg and the thumbnail files will be created automatically by the magazine publishing tool.
+
+Also, create a _front-cover.yml_ file in the _images/jacket_ folder to specify the style of the article titles.
+Here's the seed contents of that file:
+
+.front-cover.yml
+[source,yaml]
+----
+alignment: southwest
+side-margin: 100
+bottom-margin: 50
+title-spacing: 90
+font-color: 'FFFFFF'
+shadow-color: '401505'
+shadow-thickness: 1
+shadow-blur: 4
+----
+
+The important values are the font and shadow colors, specified in hex.
+
+== Commit the files
+
+Switch back to GitHub for Mac and click the repository name in the sidebar (i.e., repositories list).
+This will show the files you added.
+
+Follow these steps to commit the files:
+
+. Type "Add cover artwork" in the Summary text box
+. Leave the Description text box blank
+. Check the icon:check-square-o[] *Select All* option
+. Click the btn:[Commit] button
+
+Once the commit is complete, simply sync the changes to GitHub by clicking the btn:[Sync] button.
+
+Congratulations, the cover artwork has been uploaded!
